@@ -1,0 +1,30 @@
+name: your_project_name
+description: A new Flutter project.
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  marquee: ^2.2.1  # ← Moved marquee here
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - images/ewit.jpg
+    - images/sv.jpg
+    - images/tby.jpg
+    - images/th.jpg
+    - images/b.jpg
+    - images/f.jpg
+    - images/am.jpg
+    - images/micro.jpg
+    - images/quran.jpg
+    - images/murder.jpg
+    - images/judge.jpg
