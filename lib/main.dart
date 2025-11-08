@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget{
       debugShowCheckedModeBanner: false,
       title: 'Spotify',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
         useMaterial3: true,
       ),
       home: FirstPage(),
@@ -26,16 +26,14 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Spotify Main Page"),
-      ),
+
       body:
 
       SingleChildScrollView(
         child: Column(
           children: [
             topbar(),
-            const SizedBox(height: 16), // Added some spacing
+            const SizedBox(height: 16),
             podcasts(),
             sectionTitle("Its New Music Friday!"),
             news(),
@@ -120,10 +118,10 @@ class FirstPage extends StatelessWidget {
       runSpacing: 8,
       children: [
         tby(),
-        ye(),    // Uncommented these
-        th(),    // Uncommented these
-        ewit(),  // Uncommented these
-        sv()     // Uncommented these
+        ye(),
+        th(),
+        ewit(),
+        sv()
       ],
     );
   }
@@ -348,7 +346,7 @@ class FirstPage extends StatelessWidget {
   }
   Widget news() {
     return SizedBox(
-      height: 180, // Fixed height for the scrollable area
+      height: 180,
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -368,7 +366,6 @@ class FirstPage extends StatelessWidget {
         margin: EdgeInsets.only(right: 16),
         child: Column(
           children: [
-            // Square image container
             Container(
               width: 140,
               height: 140,
@@ -385,8 +382,6 @@ class FirstPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8),
-            // Text description
-
             SizedBox(height: 2),
             Text(
               description,
@@ -406,7 +401,7 @@ class FirstPage extends StatelessWidget {
 
   Widget shows() {
     return SizedBox(
-      height: 180, // Fixed height for the scrollable area
+      height: 180,
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -443,7 +438,7 @@ class FirstPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      height: 30, // Fixed height for marquee
+                      height: 30,
                       child: Marquee(
                         text: "elevate women in tech S1 EP26 Say yes to success how Natasha Barker became one of retail tech rising stars and elevate",
                         style: TextStyle(
