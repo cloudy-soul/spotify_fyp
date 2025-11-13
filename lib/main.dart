@@ -32,7 +32,8 @@ class FirstPage extends StatelessWidget {
       SingleChildScrollView(
         child: Column(
           children: [
-            topbar(),
+            const SizedBox(height: 25),
+            topbar(context),
             const SizedBox(height: 16),
             podcasts(),
             sectionTitle("Its New Music Friday!"),
@@ -44,16 +45,16 @@ class FirstPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: current(),
+      bottomNavigationBar: CurrentPlayer(),
     );
   }
 
-  Row topbar() {
+  Row topbar(BuildContext context) {
     return Row(
       children: [
         usericon(),
         const SizedBox(width: 8),
-        allicon(),
+        allicon(context),
         const SizedBox(width: 8),
         musicicon(),
         const SizedBox(width: 8),
@@ -69,10 +70,57 @@ class FirstPage extends StatelessWidget {
       child: Text("C", style: TextStyle(color: Colors.white)),
     );
   }
-
-  Widget allicon() {
+  Widget allicon(BuildContext context) {
     return TextButton(
-      onPressed: () => {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text("All artists"),
+                backgroundColor: Colors.white,
+              ),
+              body: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                ),
+                padding: const EdgeInsets.all(16),
+                itemCount: 8, // Number of images you have
+                itemBuilder: (context, index) {
+                  // List of your actual image paths
+                  List<String> imagePaths = [
+                    "images/1.jpg",
+                    "images/2.jpg",
+                    "images/3.jpg",
+                    "images/4.jpg",
+                    "images/5.jpg",
+                    "images/6.png",
+                    "images/7.jpg",
+                    "images/8.jpg",
+                  ];
+
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.grey[800],
+                    ),
+                    child: Image.asset(
+                      imagePaths[index],
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Icon(Icons.image, size: 50, color: Colors.grey[400]);
+                      },
+                    ),
+                  );
+                },
+              ),
+            );
+          }),
+        );
+      },
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -83,6 +131,7 @@ class FirstPage extends StatelessWidget {
       child: const Text('All'),
     );
   }
+  ////////////////////////////////////////////////////////
 
   Widget musicicon() {
     return TextButton(
@@ -355,6 +404,7 @@ class FirstPage extends StatelessWidget {
           showSquare("billie eilish", "images/b.jpg"),
           showSquare("Faouzia", "images/f.jpg"),
           showSquare("Tech Podcast", "images/micro.jpg"),
+          showSquare("New Artist", "images/3.jpg"),
         ],
       ),
     );
@@ -415,7 +465,17 @@ class FirstPage extends StatelessWidget {
       ),
     );
   }
-  Widget current() {
+  }
+class CurrentPlayer extends StatefulWidget {
+  @override
+  _CurrentPlayerState createState() => _CurrentPlayerState();
+}
+
+class _CurrentPlayerState extends State<CurrentPlayer> {
+  bool isPlaying = false;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 50,
@@ -463,7 +523,26 @@ class FirstPage extends StatelessWidget {
                   SizedBox(width: 8),
                   Icon(Icons.share, size: 20),
                   SizedBox(width: 8),
-                  Icon(Icons.play_arrow, size: 20),
+                  // Enhanced play/pause button
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green, // Spotify green color
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          isPlaying = !isPlaying;
+                        });
+                      },
+                      icon: Icon(
+                        isPlaying ? Icons.pause : Icons.play_arrow,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                      padding: EdgeInsets.all(4),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -472,4 +551,4 @@ class FirstPage extends StatelessWidget {
       ),
     );
   }
-  }
+}
